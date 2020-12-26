@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	{% if test_id == 1 %}
+    <title>سماتي - الصف التاسع - ذكور</title>
+	{% elif test_id == 2 %}
+    <title>سماتي - الصف العاشر - ذكور</title>
+	{% elif test_id == 3 %}
+    <title>سماتي - الصف الحادي عشر - ذكور</title>
+	{% elif test_id == 4 %}
+    <title>سماتي - الثاني عشر - ذكور</title>
+	{% elif test_id == 5 %}
+    <title>سماتي - الصف التاسع - إناث</title>
+	{% elif test_id == 6 %}
+    <title>سماتي - الصف العاشر - إناث</title>
+	{% elif test_id == 7 %}
+    <title>سماتي - الصف الحادي عشر - إناث</title>
+	{% elif test_id == 8 %}
+    <title>سماتي - الصف الثاني عشر - إناث</title>
+	{% endif %}
+    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="{% static '/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+	<!-- custom 1 -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"> 
+{% if noAnswersReceived %}
+<script>
+alert("لم يتم إدخال أي إجابة. الرجاء إدخال إجابتك على الأسئلة والمحاولة مرة أخرى.");
+location.href = "{{ full_url }}";
+</script>
+{% endif %}
+</head>
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto"></ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="background-image:url('{% static '/img/home-bg.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+                        <h1>مقياس الميول المهنية</h1>
+						{% if test_id == 1 %}
+						<span class="subheading">الصف التاسع - ذكور</span>
+						{% elif test_id == 2 %}
+						<span class="subheading">الصف العاشر - ذكور</span>
+						{% elif test_id == 3 %}
+						<span class="subheading">الصف الحادي عشر - ذكور</span>
+						{% elif test_id == 4 %}
+						<span class="subheading">الصف الثاني عشر - ذكور</span>
+						{% elif test_id == 5 %}
+						<span class="subheading">الصف التاسع - إناث</span>
+						{% elif test_id == 6 %}
+						<span class="subheading">الصف العاشر - إناث</span>
+						{% elif test_id == 7 %}
+						<span class="subheading">الصف الحادي عشر - إناث</span>
+						{% elif test_id == 8 %}
+						<span class="subheading">الصف الثاني عشر - إناث</span>
+						{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+		<!-- custom 2 -->
+	{%if not answered %}
+        <form class="form" method="post">
+		  {% csrf_token %}
+		  <h3 style="text-align: right; margin-bottom: 30px;">:قم بالضغط على العبارة التي تناسبك</h3>
+		{% for question in questions %}
+		  <div class="inputGroup" dir="rtl">
+		    <input id="q{{ question.id }}" name="q{{ question.id }}" type="checkbox"/>
+		    <label for="q{{ question.id }}">{{ question.question_text }}</label>
+		  </div>  
+		{% endfor %}
+			<button class="btn btn-primary" type="submit" style="float: right; border-radius: 5px;">تعرف على بيئتي</button>
+        </form>
+	{% else %}
+	<div dir="rtl">
+		<h1 style="text-align: right; margin-bottom: 80px; ">بيئاتك حسب إجابتك على الأسئلة السابقة هي كالتالي: </h1>
+	{% for p in personalities %}
+		{% if forloop.counter0 == 0 or forloop.counter0 == 1 or forloop.counter0 == 2 %}
+
+		<a href="{% static '' %}{{ p.personality_link }}">
+			<h2 style="text-align: right; margin-top: 30px; margin-bottom: 30px">{{ forloop.counter }}. {{ p.personality_text }}</h2>
+		</a>
+		<tr>
+		{% endif %}
+	{% endfor %}
+	<h6 style="text-align: right; margin-top: 80px">*يمكنك الضغط على البيئة لمعرفة المزيد عنها..</h6>
+	</div>
+	{% endif %}
+		<!-- END custom 2 -->
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <ul class="list-inline text-center">
+                       <li class="list-inline-item"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse" onclick="window.open('https://github.com/omr00t/Semati','_blank');"></i></span></li>
+                    </ul>
+                    <p class="text-muted copyright">مقياس الميول المهنية - 2021</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static '/js/jquery.min.js' %}"></script>
+    <script src="{% static '/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static '/js/bs-init.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="{% static '/js/clean-blog.js' %}"></script>
+</body>
+</html>
