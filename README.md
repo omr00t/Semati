@@ -8,3 +8,5 @@ The goal of this project is to show students the questions from the book(produce
 do not have to go through the manual process of calculating their answers for the questions in order to get the result.
 
 This project is a live on this URL: `semati.net`
+
+The admin site creds (in case you need them) are: `admin:letmein`. In case you want to enable the admin site, uncomment the admin path in `career_tendency/urls.py`.
