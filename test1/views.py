@@ -53,8 +53,12 @@ def show_result(request):
         context.update({'answered': True})
         personalities = get_result(answered_questions, test_id) 
         # Modify personalities list to be a separate list containing personalities only:
-        personalities = personalities.keys() 
-        context.update({"personalities": personalities})
+        personalities = list(personalities.keys() )
+        # This holds first letters of each personality:
+        personalities_result_letters = personalities[0].personality_letter + ' ' + \
+                                       personalities[1].personality_letter + ' ' + \
+                                       personalities[2].personality_letter
+        context.update({"personalities": personalities, "personalities_result_letters": personalities_result_letters})
         return render(request, "take_test.html", context)
     else:
         context.update({"noAnswersReceived": True, "full_url": full_url})

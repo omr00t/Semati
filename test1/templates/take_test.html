@@ -87,11 +87,14 @@ location.href = "{{ full_url }}";
 		{% if forloop.counter0 == 0 or forloop.counter0 == 1 or forloop.counter0 == 2 %}
 
 		<a href="{% static '' %}{{ p.personality_link }}">
-			<h2 style="text-align: right; margin-top: 30px; margin-bottom: 30px">{{ forloop.counter }}. {{ p.personality_text }}</h2>
+			<h2 style="text-align: right; margin-top: 30px; margin-bottom: 30px;">{{ forloop.counter }}. {{ p.personality_text }}</h2>
 		</a>
 		<tr>
 		{% endif %}
 	{% endfor %}
+	<a href="{% static '' %}{{ personalities.0.personality_link }}">
+		<h2 style="text-align: right; margin-top: 60px; margin-bottom: 30px;">{{ personalities_result_letters }}</h2>
+	</a>
 	<h6 style="text-align: right; margin-top: 80px">*يمكنك الضغط على البيئة لمعرفة المزيد عنها..</h6>
 	</div>
 	{% endif %}

@@ -26,7 +26,7 @@ SECRET_KEY = 'Not_prod_key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["semati.net", "www.semati.net"]
+ALLOWED_HOSTS = ["semati.net", "www.semati.net", "127.0.0.1"]
 
 
 # Application definition
