@@ -1,6 +1,7 @@
 from django.db import models
 
 class Personality(models.Model):
+    # Personality fields
     personality_text   = models.CharField(max_length=100)
     personality_letter = models.CharField(max_length=5, default = '-')
     personality_desc   = models.CharField(max_length=1000)
