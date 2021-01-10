@@ -51,14 +51,25 @@ def show_result(request):
         raise Http404() 
     if(answered_questions):
         context.update({'answered': True})
+
+        # A dictionary containing all the personalities. Each with its corresponding points.
         personalities = get_result(answered_questions, test_id) 
+
+        # Numerical point for perosonalities:
+        personalities_points = list(personalities.values())
+
         # Modify personalities list to be a separate list containing personalities only:
-        personalities = list(personalities.keys() )
+        personalities = list(personalities.keys())
+
         # This holds first letters of each personality:
         personalities_result_letters = personalities[0].personality_letter + ' ' + \
                                        personalities[1].personality_letter + ' ' + \
                                        personalities[2].personality_letter
-        context.update({"personalities": personalities, "personalities_result_letters": personalities_result_letters})
+
+        context.update({"personalities": personalities, 
+                        "personalities_points": personalities_points, 
+                        "personalities_result_letters": personalities_result_letters, 
+                        "test_id": test_id})
         return render(request, "take_test.html", context)
     else:
         context.update({"noAnswersReceived": True, "full_url": full_url})

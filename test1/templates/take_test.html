@@ -1,4 +1,5 @@
 {% load static %}
+{% load filters %}
 <!DOCTYPE html>
 <html>
 
@@ -43,7 +44,7 @@ location.href = "{{ full_url }}";
             <div class="row">
                 <div class="col-md-10 col-lg-8 mx-auto">
                     <div class="site-heading">
-                        <h1>مقياس الميول المهنية</h1>
+                        <a href="/" style="text-decoration: none;"><h1>مقياس الميول المهنية</h1></a>
 						{% if test_id == 1 %}
 						<span class="subheading">الصف التاسع - ذكور</span>
 						{% elif test_id == 2 %}
@@ -75,7 +76,7 @@ location.href = "{{ full_url }}";
 		{% for question in questions %}
 		  <div class="inputGroup" dir="rtl">
 		    <input id="q{{ question.id }}" name="q{{ question.id }}" type="checkbox"/>
-		    <label for="q{{ question.id }}">{{ question.question_text }}</label>
+		    <label for="q{{ question.id }}">{{ forloop.counter }}. {{ question.question_text }}</label>
 		  </div>  
 		{% endfor %}
 			<button class="btn btn-primary" type="submit" style="float: right; border-radius: 5px;">تعرف على بيئتي</button>
@@ -83,25 +84,59 @@ location.href = "{{ full_url }}";
 	{% else %}
 	<div dir="rtl">
 		<h1 style="text-align: right; margin-bottom: 80px; ">بيئاتك حسب إجابتك على الأسئلة السابقة هي كالتالي: </h1>
-	{% for p in personalities %}
-		{% if forloop.counter0 == 0 or forloop.counter0 == 1 or forloop.counter0 == 2 %}
 
-		<a href="{% static '' %}{{ p.personality_link }}">
-			<h2 style="text-align: right; margin-top: 30px; margin-bottom: 30px;">{{ forloop.counter }}. {{ p.personality_text }}</h2>
-		</a>
-		<tr>
-		{% endif %}
-	{% endfor %}
-	<a href="{% static '' %}{{ personalities.0.personality_link }}">
-		<h2 style="text-align: right; margin-top: 60px; margin-bottom: 30px;">{{ personalities_result_letters }}</h2>
-	</a>
-	<h6 style="text-align: right; margin-top: 80px">*يمكنك الضغط على البيئة لمعرفة المزيد عنها..</h6>
+
+
+            <table class="table my-0 table-striped table-hover" id="answerTable">
+                <thead>
+                    <tr>
+                        <th style="text-align: right;">م</th>
+                        <th style="text-align: center;">البيئة</th>
+                        <th style="text-align: center;">الدرجة المئينية</th>
+                    </tr>
+                </thead>
+                <tbody>
+		{% for p in personalities %}
+				{% if forloop.counter0 == 0 or forloop.counter0 == 1 or forloop.counter0 == 2 %}
+                    <tr>
+                        <td style="text-align: right;">{{ forloop.counter }}</td>
+                        <td style="text-align: center;"><a href="{% static '' %}{{ p.personality_link }}" target=”_blank”>{{ p.personality_text }}</a></td>
+                        <td style="text-align: center;">
+								
+								{{ personalities_points|index:forloop.counter0 }}
+								
+						</td>
+                    </tr>
+				{% endif %}
+        {% endfor %}
+                </tbody>
+				<tfoot>
+                    <tr>
+                        <th style="text-align: right;"></th>
+                        <th style="text-align: center;">الرمز البيئي</th>
+                        <th style="text-align: center;"></th>
+                    </tr>
+                    <td style="text-align: right;"></td>
+                    <td style="text-align: center;">
+						<a href="{% static '' %}{{ personalities.0.personality_link }}" target=”_blank”>
+										{{ personalities_result_letters }}
+						</a>
+					</td>
+                    <td style="text-align: center;"></td>
+                </tfoot>
+            </table>
+
+	<h6 style="text-align: right; margin-top: 80px;">*يمكنك الضغط على البيئة لمعرفة المزيد عنها..</h6>
+	<div dir="ltr">
+		<h6 style="text-align: right; margin-top: 40px;">{% now "d/m/Y h:i:s A" %} :تاريخ التطبيق</h6>
+	</div>	
+	<a class="btn btn-info" href="/tests/{{ test_id }}" style="float: right; border-radius: 5px; margin-top: 50px;">بدء الاختبار من جديد</a>
 	</div>
 	{% endif %}
 		<!-- END custom 2 -->
     </div>
     <footer>
-        <div class="container">
+        <div class="container" style="margin-top: 80px;">
             <div class="row">
                 <div class="col-md-10 col-lg-8 mx-auto">
                     <ul class="list-inline text-center">
