@@ -7,6 +7,6 @@ John Holland theory is utilized by the Ministry Of Education in Oman ([MOE](http
 The goal of this project is to show students the questions from the book(produced by MOE) and to calculate the answers so that students
 do not have to go through the manual process of calculating their answers for the questions in order to get the result.
 
-This project is a live on this URL: [semati.net](https://semati.net)
+This project is alive on this URL: [semati.net](https://semati.net)
 
-The admin site creds (in case you need them) are: `admin:letmein`. In case you want to enable the admin site, uncomment the admin path in `career_tendency/urls.py`.
+The admin site creds (in case you need them) are: `admin:letmein`. In case you want to enable the admin site, ensure that the line admin path in `career_tendency/urls.py` is uncommented.
