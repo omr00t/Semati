@@ -2,22 +2,21 @@ from django.db import models
 
 class Personality(models.Model):
     # Personality fields
-    personality_text   = models.CharField(max_length=100)
-    personality_letter = models.CharField(max_length=5, default = '-')
-    personality_desc   = models.CharField(max_length=1000)
+    personality_text              = models.CharField(max_length=100)
+    personality_letter            = models.CharField(max_length=5, default = '-')
+    personality_desc              = models.CharField(max_length=1000)
+    personality_careers_by_symbol = models.CharField(max_length=10000, default='-')
     # Males  (9, 10, 11, 12)
-    personality_points1 = models.CharField(max_length=50, default='-')
-    personality_points2 = models.CharField(max_length=50, default='-')
-    personality_points3 = models.CharField(max_length=50, default='-')
-    personality_points4 = models.CharField(max_length=50, default='-')
+    personality_points1           = models.CharField(max_length=50, default='-')
+    personality_points2           = models.CharField(max_length=50, default='-')
+    personality_points3           = models.CharField(max_length=50, default='-')
+    personality_points4           = models.CharField(max_length=50, default='-')
     # Females (9, 10, 11, 12)
-    personality_points5 = models.CharField(max_length=50, default='-')
-    personality_points6 = models.CharField(max_length=50, default='-')
-    personality_points7 = models.CharField(max_length=50, default='-')
-    personality_points8 = models.CharField(max_length=50, default='-')
-    # Links 
-    personality_link    = models.CharField(max_length=200, default='-')
-
+    personality_points5           = models.CharField(max_length=50, default='-')
+    personality_points6           = models.CharField(max_length=50, default='-')
+    personality_points7           = models.CharField(max_length=50, default='-')
+    personality_points8           = models.CharField(max_length=50, default='-')
+    
     @property
     def all_questions(self):
         return self.questions.all()
