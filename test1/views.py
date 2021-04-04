@@ -30,7 +30,7 @@ def take_test(request, test_id):
         raise Http404()
 
     if(request.method == "POST"):
-        # I probably need perform checks here...
+        # I probably need to perform checks here...
         request.session['post_data'] = request.POST
         request.session['test_type'] = test_id
         request.session['full_url'] = request.build_absolute_uri(reverse('take_test', args=[test_id]))
