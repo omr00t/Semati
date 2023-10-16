@@ -1,5 +1,6 @@
 # Semati
 
+# forked from [semati](https://github.com/omr00t/Semati)
 
 This project helps 9-12 grade students know their environments based on [John Holland theory](https://www.careers.govt.nz/resources/career-practice/career-theory-models/hollands-theory/).
 John Holland theory is utilized by the Ministry Of Education in Oman ([MOE](https://www.moe.gov.om)) to help students know their personalities/environments.
